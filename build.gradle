@@ -29,6 +29,7 @@ dependencies {
     compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '1.2.1.RELEASE'
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.0.36'
+    compile("org.springframework.boot:spring-boot-starter-security")
     compile 'javax.servlet:jstl:1.2'
     compile group: 'joda-time', name: 'joda-time', version: '2.3'
     compile "com.opencsv:opencsv:4.0"
