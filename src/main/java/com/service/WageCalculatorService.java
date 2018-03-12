@@ -19,11 +19,7 @@ import static com.util.Constants.*;
 public class WageCalculatorService {
 
     @Autowired
-    private OverTimeCompensationService overTimeCompensationService;
-    @Autowired
-    private EveningCompensationService eveningCompensationService;
-    @Autowired
-    private RegularCompensationService regularCompensationService;
+    private CompensationServiceFacade compensationServiceFacade;
     @Autowired
     private EmployeeLogDao employeeTimeLogDao;
 
@@ -93,11 +89,11 @@ public class WageCalculatorService {
      * @return
      */
     private BigDecimal computeWage(final EmployeeDayRecord employeeDailyLog) {
-        BigDecimal regularWage = regularCompensationService.getCompensation(employeeDailyLog);
-        BigDecimal overTimeWage = overTimeCompensationService.getCompensation(employeeDailyLog);
+        BigDecimal regularWage = compensationServiceFacade.getRegularCompensation(employeeDailyLog);
+        BigDecimal overTimeWage = compensationServiceFacade.getOverTimeCompensation(employeeDailyLog);
         BigDecimal eveningWage = new BigDecimal(WAGE_INITIAL_VALUE);
         if (overTimeWage == new BigDecimal(WAGE_INITIAL_VALUE)) {
-            eveningWage = eveningCompensationService.getCompensation(employeeDailyLog);
+            eveningWage = compensationServiceFacade.getEveningCompensation(employeeDailyLog);
         }
         return regularWage.add(eveningWage).add(overTimeWage);
     }
