@@ -1,6 +1,6 @@
 package com.service;
 
-import com.model.EmployeeDayRecord;
+import com.model.EmployeeDayWiseRecord;
 
 import java.math.BigDecimal;
 
@@ -14,5 +14,5 @@ public interface CompensationService {
      */
     double WAGE_INITIAL_VALUE = 0.0;
 
-    BigDecimal getCompensation(EmployeeDayRecord employeeDailyLog);
+    BigDecimal getCompensation(EmployeeDayWiseRecord employeeDailyLog);
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Employee day record read from the CSV file line by line.
  */
-public class EmployeeDayRecord {
+public class EmployeeDayWiseRecord {
     /**
      * Field for employee name.
      */

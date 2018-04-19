@@ -12,7 +12,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@EnableWebMvc
 @PropertySource("classpath:config.properties")
 public class PropertiesConfig extends WebMvcConfigurerAdapter {
 

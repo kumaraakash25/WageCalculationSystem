@@ -1,4 +1,4 @@
-import com.model.EmployeeDayRecord;
+import com.model.EmployeeDayWiseRecord;
 import com.service.EveningCompensationService;
 import com.service.OverTimeCompensationService;
 import com.service.RegularCompensationService;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class CompensationServiceTest {
 
-    EmployeeDayRecord employeeDailyLog;
+    EmployeeDayWiseRecord employeeDailyLog;
 
     @InjectMocks
     private OverTimeCompensationService overTimeCompensationService;
@@ -31,7 +31,7 @@ public class CompensationServiceTest {
 
     @Before
     public void setup() {
-        employeeDailyLog = mock(EmployeeDayRecord.class);
+        employeeDailyLog = mock(EmployeeDayWiseRecord.class);
         DateTime dateTime = DateTime.now();
         when(employeeDailyLog.getShiftStartDateTime()).thenReturn(dateTime);
         dateTime = dateTime.plusHours(12);

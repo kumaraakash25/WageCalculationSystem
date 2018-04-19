@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Added a role for HR to access the result.
+     * Added credentials to the HR role to access the API.
      *
      * @param auth
      * @throws Exception

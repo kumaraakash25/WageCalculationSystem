@@ -3,7 +3,7 @@ package com.model;
 import java.math.BigDecimal;
 
 /**
- * Employee monthly record.
+ * Employee monthly record. POJO for holding the employee name and salary for a particular period
  */
 public class EmployeeMonthRecord {
     /**

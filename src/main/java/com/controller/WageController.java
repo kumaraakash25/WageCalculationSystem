@@ -16,12 +16,16 @@ import java.util.Map;
 @Controller
 public class WageController {
 
-    /**
-     * Wage calculation service.
-     */
     @Autowired
     public WageCalculatorService service;
 
+    /**
+     * Rest endpoint for getting the month wise salary report for the employees.
+     *
+     * @param model
+     * @param monthYear URL parameter for monthYear in format mmYYYY
+     * @return
+     */
     @RequestMapping("/getMonthlySummary/{monthYear}")
     public String getMonthlySummary(Model model, @PathVariable("monthYear") String monthYear) {
         Map<Integer, EmployeeMonthRecord> resultMap = service.getMonthSummary(monthYear);

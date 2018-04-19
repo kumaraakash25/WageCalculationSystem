@@ -1,6 +1,6 @@
 package com.service;
 
-import com.model.EmployeeDayRecord;
+import com.model.EmployeeDayWiseRecord;
 import com.model.WageRate;
 import com.util.Constants;
 import org.apache.commons.logging.Log;
@@ -19,7 +19,7 @@ public class RegularCompensationService implements CompensationService {
     private final static Log LOG = LogFactory.getLog(RegularCompensationService.class);
 
     @Override
-    public BigDecimal getCompensation(EmployeeDayRecord employeeDailyLog) {
+    public BigDecimal getCompensation(EmployeeDayWiseRecord employeeDailyLog) {
         LOG.debug("Inside regular compensation service");
         Hours hours = Hours.hoursBetween(employeeDailyLog.getShiftStartDateTime(), employeeDailyLog.getShiftEndDateTime());
         int workHours = hours.getHours();

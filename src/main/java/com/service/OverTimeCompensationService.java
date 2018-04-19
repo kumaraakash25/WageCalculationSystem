@@ -1,7 +1,7 @@
 package com.service;
 
 import com.model.Duration;
-import com.model.EmployeeDayRecord;
+import com.model.EmployeeDayWiseRecord;
 import com.model.WageRate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +15,8 @@ import static com.model.Duration.STANDARD_WORK_HOURS;
 import static com.util.Constants.ROUND_OFF_SCALE;
 
 /**
- * Overtime shift service to calculate the wage.
+ * Overtime shift service to calculate the wage. If the employee work duration exceeds the standard 8 hours
+ * the employee is eligible for overtime payment.
  */
 @Service
 public class OverTimeCompensationService implements CompensationService {
@@ -23,11 +24,23 @@ public class OverTimeCompensationService implements CompensationService {
     private final static Log LOG = LogFactory.getLog(OverTimeCompensationService.class);
 
     @Override
-    public BigDecimal getCompensation(EmployeeDayRecord employeeDailyLog) {
+    public BigDecimal getCompensation(EmployeeDayWiseRecord employeeDailyLog) {
         LOG.debug("Inside overtime compensation service");
         DateTime employeeShiftStartDateTime = employeeDailyLog.getShiftStartDateTime();
         DateTime employeeShiftEndDateTime = employeeDailyLog.getShiftEndDateTime();
         int workHours = getHourInterval(employeeShiftStartDateTime, employeeShiftEndDateTime);
+        final double overTimeWage = calculateWage(workHours);
+        LOG.debug("Wage " + overTimeWage + " calculated for employee ID " + employeeDailyLog.getEmployeeId());
+        return new BigDecimal(overTimeWage).setScale(ROUND_OFF_SCALE, BigDecimal.ROUND_HALF_EVEN);
+    }
+
+    /**
+     * Calculates the employee wage according to the overtime time shift.
+     *
+     * @param workHours
+     * @return
+     */
+    private double calculateWage(final int workHours) {
         double wage = WAGE_INITIAL_VALUE;
         if (workHours > STANDARD_WORK_HOURS.getDuration()) {
             float overTime = workHours - STANDARD_WORK_HOURS.getDuration();
@@ -49,7 +62,7 @@ public class OverTimeCompensationService implements CompensationService {
                 wage = getWage(WageRate.HOURLY_WAGE, WageRate.FIRST_OVERTIME_DURATION_PERCENT, overTime);
             }
         }
-        return new BigDecimal(wage).setScale(ROUND_OFF_SCALE, BigDecimal.ROUND_HALF_EVEN);
+        return wage;
     }
 
     /**
