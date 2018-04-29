@@ -33,6 +33,8 @@ dependencies {
     compile 'javax.servlet:jstl:1.2'
     compile group: 'joda-time', name: 'joda-time', version: '2.3'
     compile "com.opencsv:opencsv:4.0"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '1.5.4.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aspects', version: '3.2.4.RELEASE'
     compile group: 'org.slf4j', name:'slf4j-api', version: '1.7.2'
     testCompile("junit:junit")
     testCompile 'org.mockito:mockito-core:2.7.22'
